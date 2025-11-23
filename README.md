@@ -10,7 +10,7 @@ Aplikacja Spring Boot integrująca się z API Open-Meteo do wyświetlania aktual
 
 ## 🚀 Demo Na Żywo
 
-**[🌐 Zobacz Stronę Na Żywo](https://weather-app-1-yka5.onrender.com)**
+**🌐(https://weather-app-1-yka5.onrender.com)**
 
 ## 🛠️ Rozwój Lokalny
 
