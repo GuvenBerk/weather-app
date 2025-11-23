@@ -1,14 +1,19 @@
-# Weather App - Open-Meteo API Integration
+# 🌤️ Aplikacja Pogodowa - Integracja z API Open-Meteo
 
-Spring Boot application that integrates with Open-Meteo weather API to display real-time weather data.
+Aplikacja Spring Boot integrująca się z API Open-Meteo do wyświetlania aktualnych danych pogodowych.
 
-## Features
-- Country and city selection
-- Real-time weather data from Open-Meteo
-- Temperature and wind speed display  
+## ✨ Funkcje
 
-## How to Run
+- Wybór kraju i miasta
+- Aktualne dane pogodowe z Open-Meteo
+- Wyświetlanie temperatury i prędkości wiatru
+
+## 🚀 Demo Na Żywo
+
+**[🌐 Zobacz Stronę Na Żywo](https://weather-app-1-yka5.onrender.com)**
+
+## 🛠️ Rozwój Lokalny
+
 ```bash
 ./mvnw spring-boot:run
-Open your browser and visit: http://localhost:8080
-Web Site: https://weather-app-1-yka5.onrender.com
+Otwórz przeglądarkę i odwiedź: http://localhost:8080
