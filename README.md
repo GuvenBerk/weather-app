@@ -10,3 +10,4 @@ Spring Boot application that integrates with Open-Meteo weather API to display r
 ## How to Run
 ```bash
 ./mvnw spring-boot:run
+Open your browser and visit: http://localhost:8080
