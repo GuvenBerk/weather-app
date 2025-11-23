@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>API Pogodowe</title>
+<style>
+body {
+font-family: 'Arial', sans-serif;
+margin: 0;
+padding: 40px;
+background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+min-height: 100vh;
+}
+
+.earth {
+position: fixed;
+top: 50%;
+right: -150px;
+width: 300px;
+height: 300px;
+background:
+radial-gradient(circle at 30% 30%, #74b9ff 0%, #0984e3 40%, #2d3436 70%);
+border-radius: 50%;
+animation: rotateEarth 40s linear infinite;
+opacity: 0.1;
+z-index: 0;
+}
+
+@keyframes rotateEarth {
+from { transform: translateY(-50%) rotate(0deg); }
+to { transform: translateY(-50%) rotate(360deg); }
+}
+
+.container {
+max-width: 500px;
+margin: 0 auto;
+background: rgba(255, 255, 255, 0.95);
+padding: 30px;
+border-radius: 20px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+position: relative;
+z-index: 1;
+backdrop-filter: blur(10px);
+}
+
+h1 {
+text-align: center;
+color: #2d3436;
+margin-bottom: 30px;
+font-size: 2.2em;
+}
+
+.form-group {
+margin: 20px 0;
+}
+
+label {
+display: block;
+margin-bottom: 8px;
+font-weight: bold;
+color: #2d3436;
+}
+
+select, button {
+padding: 12px;
+margin: 5px 0;
+width: 100%;
+border: 2px solid #ddd;
+border-radius: 10px;
+font-size: 16px;
+box-sizing: border-box;
+}
+
+select {
+background: white;
+cursor: pointer;
+}
+
+select:focus {
+border-color: #74b9ff;
+outline: none;
+}
+
+button {
+background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+color: white;
+border: none;
+cursor: pointer;
+font-weight: bold;
+font-size: 18px;
+padding: 15px;
+margin-top: 20px;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+}
+
+#result {
+margin-top: 25px;
+padding: 20px;
+border: 2px solid #e0e0e0;
+border-radius: 10px;
+background: white;
+}
+
+.loading {
+color: #0984e3;
+text-align: center;
+font-style: italic;
+}
+
+.error {
+color: #d63031;
+background: #ffeaa7;
+padding: 15px;
+border-radius: 8px;
+border-left: 4px solid #d63031;
+}
+
+.success {
+color: #00b894;
+}
+
+.success h3 {
+color: #2d3436;
+margin-top: 0;
+border-bottom: 2px solid #00b894;
+padding-bottom: 10px;
+}
+</style>
+</head>
+<body>
+<div class="earth"></div>
+
+<div class="container">
+<h1>🌤️ API Pogodowe</h1>
+
+<div class="form-group">
+<label>Wybierz kraj:</label>
+<select id="country" onchange="updateCities()">
+<option value="">-- Wybierz kraj --</option>
+<option value="poland">Poland</option>
+<option value="turkey">Türkiye</option>
+<option value="germany">Germany</option>
+<option value="france">France</option>
+<option value="italy">Italy</option>
+<option value="spain">Spain</option>
+<option value="uk">United Kingdom</option>
+<option value="usa">USA</option>
+<option value="japan">Japan</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Wybierz miasto:</label>
+<select id="city">
+<option value="">-- Najpierw wybierz kraj --</option>
+</select>
+</div>
+
+<button onclick="getWeather()">🌤️ Sprawdz pogode</button>
+
+<div id="result"></div>
+</div>
+
+<script>
+const cities = {
+poland: [
+{name: "Warsaw", lat: 52.23, lon: 21.01},
+{name: "Krakow", lat: 50.06, lon: 19.94},
+{name: "Wroclaw", lat: 51.11, lon: 17.03},
+{name: "Poznan", lat: 52.41, lon: 16.93},
+{name: "Gdansk", lat: 54.35, lon: 18.65}
+],
+turkey: [
+{name: "Istanbul", lat: 41.01, lon: 28.98},
+{name: "Ankara", lat: 39.93, lon: 32.86},
+{name: "Izmir", lat: 38.42, lon: 27.14},
+{name: "Bursa", lat: 40.19, lon: 29.07},
+{name: "Antalya", lat: 36.89, lon: 30.70},
+{name: "Samsun", lat: 41.29, lon: 36.33}
+],
+germany: [
+{name: "Berlin", lat: 52.52, lon: 13.41},
+{name: "Munich", lat: 48.14, lon: 11.58},
+{name: "Hamburg", lat: 53.55, lon: 10.00},
+{name: "Cologne", lat: 50.94, lon: 6.96},
+{name: "Frankfurt", lat: 50.11, lon: 8.68}
+],
+france: [
+{name: "Paris", lat: 48.86, lon: 2.35},
+{name: "Marseille", lat: 43.30, lon: 5.37},
+{name: "Lyon", lat: 45.76, lon: 4.83},
+{name: "Toulouse", lat: 43.60, lon: 1.44},
+{name: "Nice", lat: 43.70, lon: 7.27}
+],
+italy: [
+{name: "Rome", lat: 41.90, lon: 12.50},
+{name: "Milan", lat: 45.46, lon: 9.19},
+{name: "Venice", lat: 45.44, lon: 12.32},
+{name: "Florence", lat: 43.77, lon: 11.26},
+{name: "Naples", lat: 40.85, lon: 14.27}
+],
+spain: [
+{name: "Madrid", lat: 40.42, lon: -3.70},
+{name: "Barcelona", lat: 41.39, lon: 2.17},
+{name: "Seville", lat: 37.39, lon: -5.99},
+{name: "Valencia", lat: 39.47, lon: -0.38},
+{name: "Malaga", lat: 36.72, lon: -4.42}
+],
+uk: [
+{name: "London", lat: 51.51, lon: -0.13},
+{name: "Manchester", lat: 53.48, lon: -2.24},
+{name: "Birmingham", lat: 52.48, lon: -1.90},
+{name: "Glasgow", lat: 55.86, lon: -4.25},
+{name: "Liverpool", lat: 53.41, lon: -2.98}
+],
+usa: [
+{name: "New York", lat: 40.71, lon: -74.01},
+{name: "Los Angeles", lat: 34.05, lon: -118.24},
+{name: "Chicago", lat: 41.88, lon: -87.63},
+{name: "Miami", lat: 25.76, lon: -80.19},
+{name: "Las Vegas", lat: 36.17, lon: -115.14}
+],
+japan: [
+{name: "Tokyo", lat: 35.68, lon: 139.69},
+{name: "Osaka", lat: 34.69, lon: 135.50},
+{name: "Kyoto", lat: 35.01, lon: 135.77},
+{name: "Yokohama", lat: 35.44, lon: 139.64},
+{name: "Hiroshima", lat: 34.39, lon: 132.46}
+]
+};
+
+function updateCities() {
+const country = document.getElementById('country').value;
+const citySelect = document.getElementById('city');
+
+citySelect.innerHTML = '<option value="">-- Wybierz miasto --</option>';
+
+if (country && cities[country]) {
+cities[country].forEach(city => {
+const option = new Option(city.name, city.name);
+option.setAttribute('data-lat', city.lat);
+option.setAttribute('data-lon', city.lon);
+citySelect.add(option);
+});
+}
+}
+
+function getWeather() {
+const citySelect = document.getElementById('city');
+const selectedOption = citySelect.options[citySelect.selectedIndex];
+const lat = selectedOption.getAttribute('data-lat');
+const lon = selectedOption.getAttribute('data-lon');
+const cityName = selectedOption.value;
+
+const resultDiv = document.getElementById('result');
+
+if (!lat || !lon) {
+resultDiv.innerHTML = '<div class="error">⚠️ Prosze wybrac miasto!</div>';
+return;
+}
+
+resultDiv.innerHTML = '<div class="loading">⏳ Ladowanie pogody dla ' + cityName + '...</div>';
+
+fetch('/api/weather?lat=' + lat + '&lon=' + lon)
+.then(response => response.text())
+.then(data => {
+try {
+const weatherData = JSON.parse(data);
+const current = weatherData.current_weather;
+
+const formattedData = `
+<div class="success">
+<h3>🌤️ Pogoda dla ${cityName}</h3>
+<p><strong>🌡️ Temperatura:</strong> ${current.temperature} °C</p>
+<p><strong>💨 Wiatr:</strong> ${current.windspeed} km/h</p>
+</div>
+`;
+
+resultDiv.innerHTML = formattedData;
+} catch (e) {
+resultDiv.innerHTML = '<div class="success"><h3>Pogoda dla ' + cityName + ':</h3><pre>' + data + '</pre></div>';
+}
+})
+.catch(error => {
+resultDiv.innerHTML = '<div class="error">❌ Blad: ' + error + '</div>';
+});
+}
+</script>
+</body>
+</html>
