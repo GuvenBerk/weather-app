@@ -14,6 +14,6 @@ A Spring Boot application integrating with the Open-Meteo API to display current
 
 ## 🛠️ Local Development
 
-``bash
+```bash
 ./mvnw spring-boot:run
 Open your browser and visit: http://localhost:8080
