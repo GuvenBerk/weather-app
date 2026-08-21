@@ -1,6 +1,6 @@
 # Weather App - Open-Meteo API Integration
 
-> **Live Environment:** [weather-app-1-yka5.onrender.com](https://weather-app-1-yka5.onrender.com)
+> **Live URL:** [weather-app-1-yka5.onrender.com](https://weather-app-1-yka5.onrender.com)
 
 ### Project Overview
 A lightweight Spring Boot web application that consumes the third-party Open-Meteo API to deliver real-time weather data based on dynamic geographical selections.
@@ -23,7 +23,7 @@ A lightweight Spring Boot web application that consumes the third-party Open-Met
 
 # Aplikacja Pogodowa - Integracja z API Open-Meteo
 
-> **Środowisko Produkcyjne:** [weather-app-1-yka5.onrender.com](https://weather-app-1-yka5.onrender.com)
+> **Adres URL:** [weather-app-1-yka5.onrender.com](https://weather-app-1-yka5.onrender.com)
 
 ### Opis Projektu
 Lekka aplikacja internetowa oparta na Spring Boot, która integruje się z zewnętrznym API Open-Meteo, aby dostarczać dane pogodowe w czasie rzeczywistym na podstawie dynamicznego wyboru lokalizacji.
