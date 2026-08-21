@@ -2,6 +2,8 @@
 
 > **Live Environment:** [weather-app-1-yka5.onrender.com](https://weather-app-1-yka5.onrender.com)
 
+*(Buraya uygulamanın ekran görüntüsünü ekleyeceğiz)*
+
 ### Project Overview
 A lightweight Spring Boot web application that consumes the third-party Open-Meteo API to deliver real-time weather data based on dynamic geographical selections.
 
@@ -14,10 +16,10 @@ A lightweight Spring Boot web application that consumes the third-party Open-Met
 
 ### Tech Stack
 
-* **Backend:** Java, Spring Boot
-* **Infrastructure:** Docker, Render
-* **External API:** Open-Meteo REST API
-* **Frontend:** HTML, CSS, Vanilla JavaScript
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
 
 ---
 
@@ -37,7 +39,7 @@ Lekka aplikacja internetowa oparta na Spring Boot, która integruje się z zewn�
 
 ### Technologie
 
-* **Backend:** Java, Spring Boot
-* **Infrastruktura:** Docker, Render
-* **Zewnętrzne API:** Open-Meteo REST API
-* **Frontend:** HTML, CSS, Vanilla JavaScript
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
